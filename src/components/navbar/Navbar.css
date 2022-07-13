@@ -1,6 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
+li {
+    list-style: none;
+}
+.nav{
+    display: flex ;
+    position: sticky;
+    top:0px;
+    padding: 0.8;
+}
+.navbar-toggler{
+    display: flex;
+    justify-content: flex-end;
+
+}
 .navbar-dark {
     background-color: rgb(14, 28, 37);
     color: #06E3E2;
@@ -26,11 +40,12 @@
     text-decoration: none;
 }
 
+
 .nav-link-dark:hover {
-    color: red;
+    color: #C6EFF9;
 }
 .nav-link-light:hover {
-    color: red;
+    color: #85909D;
 }
 .nav-link-dark {
     color: #34BCD4;
@@ -43,9 +58,26 @@
     text-decoration: none;
 
 }
+
 .form-control {
     background-color: #0E1C25;
 }
 a * {
     color: #DC3803;
 }
+
+
+.navbar {
+    padding: 0 16px;
+  }
+  
+ 
+  
+  @media (max-width: 768px) {
+    
+    .navbar {
+      padding: 8px 16px;
+      
+      
+    }
+  }
