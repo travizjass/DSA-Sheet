@@ -1,6 +1,8 @@
 const express=require('express')
 const User=require('../Models/usermodel')
-const Activity = require('../Models/activitymodel')
+const ActivityDSA = require('../Models/activityModelDSA')
+const ActivityFaraj = require('../Models/activityModelSFaraj')
+const ActivityStriver = require('../Models/activityModelStriver')
 const router=express.Router()
 var jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -9,9 +11,9 @@ const {body, validationResult}=require('express-validator')
 const secureKey="#R4UN4K#J4SM1N#"
 
     router.post('/createuser',[
-        body("name","Enter Valid Name").isLength({min:5}),
-        body("email","Enter valid Email").isEmail(),
-        body("password","Enter minimum 5 character").isLength({min:5})
+        body("name","Enter Valid Name").isLength({min:2}),
+        body("email","Enter Valid Email").isEmail(),
+        body("password","Enter minimum 5 character long password").isLength({min:5})
 
     ], async(req,res)=>{
          
@@ -26,7 +28,7 @@ const secureKey="#R4UN4K#J4SM1N#"
             let user= await User.findOne({email:req.body.email})
             //    console.log(user);
             if(user){
-                return res.status(400).json({error:"Already have an account With this Email Procced to Login"})
+                return res.status(400).json({error:"Already have an account With this Email !!"})
             }
             const saltRounds = 10;
             const salt = bcrypt.genSaltSync(saltRounds);
@@ -37,15 +39,44 @@ const secureKey="#R4UN4K#J4SM1N#"
                 email:req.body.email,
                 password:secpass
             })
-            let activity = await Activity.findOne({email:req.body.email})
+            // let activityDSA = await ActivityDSA.findOne({email:req.body.email})
+            // let activityLove = await ActivityFaraj.findOne({email:req.body.email})
+            // let activityStriver = await ActivityStriver.findOne({email:req.body.email})
             // if(activity){
             //     success=false;
             //     return res.status(400).json({error:"Already have an account With this Email Procced to Login"})
             // }
-            activity = await Activity.create({
+            activityD = await ActivityDSA.create({
                 name: req.body.name,
                 email: req.body.email,
-                questions: [0],
+                love: [0],
+                Array:0,
+                Matrix:0,
+                String:0,
+                Search:0,
+                Linked:0,
+                Binary:0,
+                BST:0,
+                Greedy:0,
+                Backtracking:0,
+                Stacks:0,
+                Heap:0,
+                Graph:0,
+                Trie:0,
+                Dynamic:0,
+                Bit:0,
+                user:user.id,
+            })
+            activityL = await ActivityFaraj.create({
+                name: req.body.name,
+                email: req.body.email,
+                faraj: [0],
+                user:user.id,
+            })
+            activityS = await ActivityStriver.create({
+                name: req.body.name,
+                email: req.body.email,
+                striver: [0],
                 user:user.id,
             })
          const  data={
@@ -88,7 +119,7 @@ const secureKey="#R4UN4K#J4SM1N#"
 
             if(!user){
                 success=false;
-              return  res.status(400).json({error:"invalid  Credential"})
+              return  res.status(400).json({error:"No Person with this Email found"})
             }
            const checkpass=bcrypt.compareSync(password, user.password); // true
 
@@ -101,7 +132,7 @@ const secureKey="#R4UN4K#J4SM1N#"
        const token= jwt.sign(data, secureKey);
            if(!checkpass){
             success=false;
-            return  res.status(400).json({error:"invalid  Credential"})
+            return  res.status(400).json({error:"Incorrect Password"})
           }
           success=true;
         //   res.cookie('token', token, { httpOnly: true });
@@ -111,7 +142,7 @@ const secureKey="#R4UN4K#J4SM1N#"
             
            } catch (error) {
             console.error(error.message)
-           return res.status(400).json({error:"Login not Success Please Enter Correct credentials"})
+           return res.status(400).json({error:"No such account with this Email ID exists. First Create an Account using Sign Up"})
            }
 
     })

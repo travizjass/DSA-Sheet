@@ -8,7 +8,8 @@ li {
     display: flex ;
     position: sticky;
     top:0px;
-    padding: 0.8;
+    padding-top: 0.8rem;
+    z-index: 100;
 }
 .navbar-toggler{
     display: flex;

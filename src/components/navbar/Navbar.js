@@ -15,21 +15,19 @@ export default function Navbar(props) {
    }
    const context=useContext(dataContext);
    const {username,getData}=context;
-   
-  //  
   return (
     <nav className={`navbar-${props.mode} navbar-expand-lg nav  `}  >
     <div className="d-flex container-fluid">
-      <p className={`navbar-brand-${props.mode}`}>{username}🤖</p>
+    
       {/* <button className="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button> */}
       <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
           <li className="nav-item">
-            <Link className={`nav-link-${props.mode}`} aria-current="page" to="/">
-          Home
-            </Link>
+          <p className={`navbar-brand-${props.mode}` } href="/"> <Link className={`nav-link-${props.mode}`} aria-current="page" to="/">
+           {username} 🤖 Home
+            </Link></p>
           </li>
         </ul>
       {/* <div className="d-flex justify-content-center" > */}
@@ -44,8 +42,6 @@ export default function Navbar(props) {
         <Link className="btn btn-outline-success mx-2" to="/signup" type="submit">Signup</Link>
           </li>
         </ul>
-  
-
   </form>:<ul><li><button onClick={handleLogout} className='btn btn-outline-success my-2' to="/login" type='submit'>logout</button></li></ul>
 }
       </div>
